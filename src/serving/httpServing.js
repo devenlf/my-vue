@@ -1,6 +1,7 @@
 import axios from 'axios';
 //引入message模块 用于信息展示
 import { Message } from "element-ui";
+const baseURLText = "http://test-chitu-admin-api.qttcs.cn";
 //创建a标签
 const newWin=(url,id)=>{
     const a=document.createElement('a');
@@ -27,9 +28,10 @@ const newWin=(url,id)=>{
       axios.interceptors.response.use(
         res => {
           //拦截响应，做统一处理 
+          
           if (res.data.code == 103) {
             Message.error(res.data.message);
-            const url = process.env.VUE_APP_ADV_URL;
+            const url = 'http://qa1-adv.qttcs.cn';
             if (res.config.url.includes("/user/index")) {
               newWin(url, "VUE_APP_ADV_URL");
             }
@@ -49,7 +51,7 @@ const newWin=(url,id)=>{
 class Http{
     constructor(){
         //配置axios 默认baseurl
-        axios.defaults.baseURL = process.env.VUE_APP_BASEURL;
+        axios.defaults.baseURL = baseURLText;
         axios.defaults.withCredentials = true;//需要发送cookie
         axios.defaults.timeout = 100000;
     }

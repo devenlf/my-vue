@@ -1,0 +1,85 @@
+.setTokenDiv{
+    text-align: left;
+    .title{
+        font-size: 20px;
+        font-weight: bold;
+    }
+}
+.fontBold{
+    font-weight: bold;
+}
+.el-row {
+    margin-bottom: 10px;
+}
+
+.list-title {
+    display: inline-block;
+    height: 25px;
+    font: bolder 20px/32px "Microsoft YaHei";
+    color: #34363A;
+    position: relative;
+    &::before{
+        position: absolute;
+        content:"";
+        left: 50%;
+        bottom: 0;
+        width: 48px;
+        height: 6px;
+        background: rgba(101, 164, 245, .5);
+        z-index: -1;
+        transform: translate(-50%);
+
+    }
+    
+}
+
+.search-item {
+    margin-left: 15px;
+    display: inline-block;
+    font-size: 14px;
+    text-align: right;
+
+    padding-top: 3px;
+}
+
+.search-item-label {
+    margin-right: 5px;
+    line-height: 32px;
+    color: #7C818B;
+}
+
+.search-item .el-input-group {
+    float: right;
+    width: 80%;
+}
+.search-item .el-date-editor{
+    width: 250px !important;
+}
+
+.search-type-select {
+    width: 120px;
+    height: 30px;
+    background: #fff;
+    color: #33343C;
+}
+
+.table-operate-box span {
+    display: inline-block;
+    padding: 0 3px;
+    // color: #3582fb;
+    cursor: pointer;
+}
+
+.table-empty-create {
+    // color: #3582fb;
+    cursor: pointer;
+}
+
+.el-table__row a {
+    color: #3582fb;
+}
+
+.el-table__row a:hover {
+    text-decoration: underline;
+}
+

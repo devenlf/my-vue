@@ -1,18 +1,10 @@
 //api统一入口文件
-import site from "./site";
-import system from "./system";
-import datalist from "./datalist";
 import api from "./api";
-import middlePage from "./middlePage";
-import error from "./error";
+import system from './system'
 
 const obj = {
-  site,
   api,
-  system,
-  error,
-  middlePage,
-  datalist,
+  system
 };
 export default{
     install(Vue) {

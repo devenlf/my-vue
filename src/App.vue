@@ -1,58 +1,37 @@
 <template>
 
   <div id="app">
-    <el-container>
+    <el-container style="height:100vh;">
     <el-header class="system-header">
       <div class="logo">  
         <img src="@/assets/common/11.png" alt="">
       </div>
       <div class="user-info">
-        <span>账户名:guanggao</span>
-        <span>用户ID:123456</span>
+        <span>账户名:{{userInfo.display_name}}</span>
+        <span>用户ID:{{userInfo.id}}</span>
       </div>     
     </el-header>
-
     <el-container class="container-box">
+
+
       <el-aside>
-    <el-menu :default-openeds="['1', '3']">
-      <el-submenu index="1">
-        <template slot="title"><i class="el-icon-message"></i>系统设置</template>
-        <el-menu-item-group>
-          <template slot="title">金币设置</template>
-        </el-menu-item-group>
-         <el-menu-item-group>
-          <template slot="title">订单去重</template>
-        </el-menu-item-group>
+    <el-menu>
+      <template v-for="(item,index) in menuList">
+        <el-submenu :index="item.order" :key="index">
+        <template slot="title"><i :class="item.icon"></i>{{item.text}}</template>
+          <el-menu-item v-for="(item2,index2) in item.submenu" 
+          :index="item2.order" 
+          :key="index2">
+            <router-link class="rouLink" :to="item2.router">
+              {{item2.text}}
+            </router-link>
+            </el-menu-item>
       </el-submenu>
-      <el-submenu index="2">
-        <template slot="title"><i class="el-icon-menu"></i>数据分析</template>
-          <el-menu-item-group>
-          <template slot="title">站点列表</template>
-        </el-menu-item-group>
-         <el-menu-item-group>
-          <template slot="title">金币抵扣列表</template>
-        </el-menu-item-group>
-      </el-submenu>
-      <el-submenu index="3">
-        <template slot="title"><i class="el-icon-setting"></i>错误分析</template>
-         <el-menu-item-group>
-          <template slot="title">图表</template>
-        </el-menu-item-group>
-         <el-menu-item-group>
-          <template slot="title">Vue错误列表</template>
-        </el-menu-item-group>
-      </el-submenu>
+      </template>
     </el-menu>
   </el-aside>
-
-
-
-
-
-
-    <el-main>Main
+    <el-main>
           <router-view/>
-
     </el-main>
   </el-container>
 </el-container>
@@ -62,14 +41,24 @@
 <script>
 export default {
   name: 'App',
+  data(){
+    return{
+      userInfo:{},
+      menuList:this.$dataConfig.menuList
+    }
+  },
   created(){
-    this.getUserInfo();
+    this.getData();
+    console.log(this.$dataConfig)
   },
   methods:{
-    getUserInfo(){
-      
+    async getData(){
+      const { code , data }=await this.$api.getUserInfo();
+        if(code==200){
+            this.userInfo=data;
+        }     
     }
-  }
+  } 
 }
 </script>
 
@@ -110,13 +99,15 @@ margin: 0;
     color: #333;
     text-align: center;
     width: 10%;
+    border-right: 0px;
   }
   
   .el-main {
-    background-color: #E9EEF3;
-    color: #333;
-    text-align: center;
-    width: 80%;
+    // background-color: #E9EEF3;
+    // color: #333;
+    // text-align: center;
+    // width: 80%;
+    border-left: solid 1px #e6e6e6;
   }
   
   .container-box{
@@ -133,4 +124,14 @@ margin: 0;
   .el-container:nth-child(7) .el-aside {
     line-height: 320px;
   }
+  .rouLink{
+    text-decoration: none;
+    color:rgb(7, 6, 6);
+  }
+  // .rouLink .-active{
+  //   color:red;
+  // }
+   .el-menu .-active {
+  color: #2233b6;
+}
 </style>

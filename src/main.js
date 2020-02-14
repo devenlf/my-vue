@@ -7,12 +7,14 @@ import App from './App'
 import router from './router'
 import less from 'less'
 import api from './api'
+import dataConfig from './assets/common/js/config'
 
-
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+Vue.prototype.$dataConfig=dataConfig;
 Vue.use(ElementUI)
 Vue.use(less)
 Vue.use(api)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
